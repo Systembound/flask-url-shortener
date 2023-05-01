@@ -1,0 +1,9 @@
+default_context:
+    project_name: "flask_url_shortener"
+    app_name: "api"
+    python_version: "3.8"
+    admin_user_username: "ammadkhalid"
+    admin_user_email: "ammadkhalid@systembound.com"
+    admin_user_password: "ammadkhalid"
+    use_celery: "no"
+    wsgi_server: "gunicorn"

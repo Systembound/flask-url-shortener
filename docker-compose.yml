@@ -1,0 +1,55 @@
+# WARNING: this may not be 100% production ready, but it's a good start.
+version: '3.3'
+
+services:
+
+
+  nginx:
+    image: nginx:alpine
+    expose:
+      - "80"
+    env_file:
+      - .flaskenv
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - default
+      - web
+    links:
+      - web
+    depends_on:
+      - web
+    restart: unless-stopped
+
+  db:
+    image: postgres:13.10
+    volumes:
+      - ./docker/postgresql/data/:/var/lib/postgresql/data/pgdata/
+    restart: always
+    env_file:
+      - .flaskenv
+    networks:
+      - web
+
+
+  web:
+#    image: api
+    build: .
+    command: gunicorn -b 0.0.0.0:5000 api.wsgi:app
+    env_file:
+      - ./.flaskenv
+    environment:
+      - DATABASE_URI=sqlite:////db/api.db
+    volumes:
+      - ./api:/code/api
+      - ./db/:/db/
+    expose:
+      - 5000
+
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+  web:
+

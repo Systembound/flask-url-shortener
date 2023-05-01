@@ -1,0 +1,24 @@
+# Flask environmental variables
+FLASK_ENV=development
+FLASK_APP=api.app:create_app
+
+# generate flask secret key using this link: https://randomkeygen.com/
+SECRET_KEY=rLTvbJTFXJHsrJW7NFk75kYYaf6bETnQ
+
+# SQLAlchemy, use postgresql://postgres:postgres@postgres:5432/postgres for postgresql
+DATABASE_URI=sqlite:///db/db.sqlite3
+SQLALCHEMY_TRACK_MODIFICATIONS=False
+
+
+# Postgresql
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=postgres
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+
+# Nginx Proxy configuration
+VIRTUAL_HOST=sysbd.link
+LETSENCRYPT_HOST=sysbd.link
+LETSENCRYPT_EMAIL=certbot@systembound.com
+# VIRTUAL_PORT=80
