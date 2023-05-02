@@ -1,4 +1,4 @@
-from flask import redirect, Blueprint, render_template
+from flask import redirect, Blueprint
 from flask.views import MethodView
 
 from api import extensions

@@ -2,6 +2,8 @@
 FLASK_ENV=development
 FLASK_APP=api.app:create_app
 
+BRAND_WEBSITE=https://www.systembound.com
+
 # generate flask secret key using this link: https://randomkeygen.com/
 SECRET_KEY=rLTvbJTFXJHsrJW7NFk75kYYaf6bETnQ
 

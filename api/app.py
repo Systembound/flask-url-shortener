@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+import os
+
+from flask import Flask, redirect
 
 from api import api, commons
 from api import auth
@@ -26,10 +28,11 @@ def create_app(testing=False):
 
 
 def configure_error_handlers(app):
-    # @app.errorhandler(404)
-    # def redirect_to_url(e):
-    #     return render_template("302.html", url=e.description)
-    pass
+    @app.errorhandler(404)
+    def redirect_to_url():
+        return redirect(
+            os.getenv("BRAND_WEBSITE"), 302
+        )
 
 
 def configure_extensions(app):
