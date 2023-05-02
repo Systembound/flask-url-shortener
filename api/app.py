@@ -1,3 +1,4 @@
+import logging
 import os
 
 from flask import Flask, redirect
@@ -8,6 +9,8 @@ from api import manage
 from api.extensions import db
 from api.extensions import jwt
 from api.extensions import migrate
+
+logger = logging.getLogger(__name__)
 
 
 def create_app(testing=False):
@@ -29,7 +32,8 @@ def create_app(testing=False):
 
 def configure_error_handlers(app):
     @app.errorhandler(404)
-    def redirect_to_url():
+    def redirect_to_url(error):
+        logger.error(error)
         return redirect(
             os.getenv("BRAND_WEBSITE"), 302
         )
