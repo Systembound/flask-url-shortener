@@ -2,10 +2,9 @@ from flask import url_for
 
 
 def test_url_shorten_manager(client, db, user, admin_headers):
-    # test 404
-    rep = client.get(url_for('api.url'), headers=admin_headers)
-    breakpoint()
-    assert rep.status_code == 404
+    response = client.json(url_for('api.url'), headers=admin_headers)
+    # TODO: validate the 400, response and see if gives error for missing url
+    assert response.status_code == 400
 
     db.session.add(user)
     db.session.commit()

@@ -9,6 +9,7 @@ __pycache__/
 db
 docker
 .flaskenv
+.idea
 
 # Distribution / packaging
 .Python

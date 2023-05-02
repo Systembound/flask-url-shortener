@@ -11,13 +11,13 @@ FROM python:3.8
 RUN mkdir /code
 WORKDIR /code
 
-COPY requirements.txt setup.py tox.ini ./
+COPY requirements.txt tox.ini ./
 # got no enought time for upgrading pip.
 # RUN pip install -U pip
 RUN pip install -r requirements.txt
 # RUN pip install -e .
 
 COPY api api/
-COPY migrations migrations/
+#COPY migrations migrations/
 
 EXPOSE 5000

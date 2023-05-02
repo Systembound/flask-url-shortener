@@ -28,14 +28,29 @@ class FlaskRestfulPlugin(FlaskPlugin):
         return rule
 
 
-class APISpecExt:
+class APISpecExt(APISpec):
     """Very simple and small extension to use apispec with this API as a flask extension"""
 
     def __init__(self, app=None, **kwargs):
+        title = kwargs.pop("title", "flask_url_shortener")
+        version = kwargs.pop("version", "1.0.0")
+        openapi_version = kwargs.pop("openapi_version", "3.0.2")
+        specext_plugins = [FlaskRestfulPlugin(), MarshmallowPlugin()]
+        plugins = kwargs.pop("plugins", specext_plugins)
+
+        kwargs.update(
+            {
+                "title": title,
+                "version": version,
+                "openapi_version": openapi_version,
+                "plugins": plugins,
+             })
+        super(APISpecExt, self).__init__(**kwargs)
         self.spec = None
 
         if app is not None:
             self.init_app(app, **kwargs)
+
 
     def init_app(self, app, **kwargs):
         app.config.setdefault("APISPEC_TITLE", "flask_url_shortener")

@@ -1,6 +1,9 @@
+from marshmallow.fields import URL
+
+from api.api.schemas.validators import validate_url_length
+from api.extensions import ma, db
 from api.models import User
 from api.models.api import Url
-from api.extensions import ma, db
 
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
@@ -16,6 +19,11 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 
 class URLShortenerSchema(ma.SQLAlchemyAutoSchema):
     id = ma.Int(dump_only=True)
+    hits = ma.Int(dump_only=True)
+    created = ma.DateTime(dump_only=True)
+    url = ma.URL(required=True, validate=[
+        URL(require_tld=True, message="Invalid URL"), validate_url_length
+    ])
 
     class Meta:
         model = Url

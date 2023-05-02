@@ -14,6 +14,10 @@ run:
 	@mkdir -p db
 	docker-compose up -d
 
+start:
+	@mkdir -p db
+	docker-compose up
+
 db-init:
 	docker-compose exec web flask db init
 

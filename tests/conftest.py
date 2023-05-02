@@ -1,13 +1,14 @@
 import json
+from json import dumps
+
 import pytest
 from dotenv import load_dotenv
+from pytest_factoryboy import register
 
-from api.models import User
 from api.app import create_app
 from api.extensions import db as _db
-from pytest_factoryboy import register
+from api.models import User
 from tests.factories import UserFactory
-
 
 register(UserFactory)
 
@@ -17,6 +18,23 @@ def app():
     load_dotenv(".testenv")
     app = create_app(testing=True)
     return app
+
+
+@pytest.fixture
+def client(app):
+    client = app.test_client()
+
+    # monkey patch json attribute and send json data
+    def json(*args, **kwargs):
+        """
+        Send json data
+        """
+        kwargs['data'] = dumps(kwargs.pop('data', {}))
+        kwargs['content_type'] = 'application/json'
+        return client.post(*args, **kwargs)
+
+    client.json = json
+    yield client
 
 
 @pytest.fixture

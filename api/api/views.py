@@ -15,11 +15,12 @@ api = Api(blueprint)
 api.add_resource(URLShortenerResource, "/url", endpoint="url")
 
 
-@blueprint.before_app_first_request
+@blueprint.before_app_request
 def register_views():
-    apispec.spec.components.schema("UserSchema", schema=UserSchema)
-    apispec.spec.path(view=UserResource, app=current_app)
-    apispec.spec.path(view=UserList, app=current_app)
+    # apispec.components.schema("UserSchema", schema=UserSchema)
+    # apispec.path(view=UserResource, app=current_app)
+    # apispec.path(view=UserList, app=current_app)
+    pass
 
 
 @blueprint.errorhandler(ValidationError)
