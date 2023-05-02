@@ -26,10 +26,10 @@ def create_app(testing=False):
 
 
 def configure_error_handlers(app):
-    @app.errorhandler(404)
-    def redirect_to_url(e):
-        breakpoint()
-        return render_template("302.html", url=e.description)
+    # @app.errorhandler(404)
+    # def redirect_to_url(e):
+    #     return render_template("302.html", url=e.description)
+    pass
 
 
 def configure_extensions(app):
