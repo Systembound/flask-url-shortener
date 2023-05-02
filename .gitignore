@@ -10,6 +10,7 @@ db
 docker
 .flaskenv
 .idea
+docker-compose.yml
 
 # Distribution / packaging
 .Python

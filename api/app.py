@@ -1,8 +1,8 @@
-from flask import Flask
-from api import api
+from flask import Flask, render_template
+
+from api import api, commons
 from api import auth
 from api import manage
-from api.extensions import apispec
 from api.extensions import db
 from api.extensions import jwt
 from api.extensions import migrate
@@ -19,9 +19,17 @@ def create_app(testing=False):
     configure_extensions(app)
     configure_cli(app)
     configure_apispec(app)
+    configure_error_handlers(app)
     register_blueprints(app)
 
     return app
+
+
+def configure_error_handlers(app):
+    @app.errorhandler(404)
+    def redirect_to_url(e):
+        breakpoint()
+        return render_template("302.html", url=e.description)
 
 
 def configure_extensions(app):
@@ -59,4 +67,5 @@ def configure_apispec(app):
 def register_blueprints(app):
     """Register all blueprints for application"""
     app.register_blueprint(auth.views.blueprint)
+    app.register_blueprint(commons.views.blueprint)
     app.register_blueprint(api.views.blueprint)

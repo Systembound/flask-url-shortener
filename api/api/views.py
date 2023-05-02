@@ -1,10 +1,8 @@
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, jsonify
 from flask_restful import Api
 from marshmallow import ValidationError
-from api.extensions import apispec
-from api.api.resources import UserResource, UserList, URLShortenerResource
-from api.api.schemas import UserSchema
 
+from api.api.resources import URLShortenerResource
 
 blueprint = Blueprint("api", __name__, url_prefix="/api/v1")
 api = Api(blueprint)
@@ -12,7 +10,7 @@ api = Api(blueprint)
 
 # api.add_resource(UserResource, "/users/<int:user_id>", endpoint="user_by_id")
 # api.add_resource(UserList, "/users", endpoint="users")
-api.add_resource(URLShortenerResource, "/url", endpoint="url")
+api.add_resource(URLShortenerResource, "/url", "/url/<short_url_id>", endpoint="url")
 
 
 @blueprint.before_app_request

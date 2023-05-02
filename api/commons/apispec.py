@@ -44,13 +44,12 @@ class APISpecExt(APISpec):
                 "version": version,
                 "openapi_version": openapi_version,
                 "plugins": plugins,
-             })
+            })
         super(APISpecExt, self).__init__(**kwargs)
         self.spec = None
 
         if app is not None:
             self.init_app(app, **kwargs)
-
 
     def init_app(self, app, **kwargs):
         app.config.setdefault("APISPEC_TITLE", "flask_url_shortener")
@@ -101,3 +100,5 @@ class APISpecExt(APISpec):
 
     def redoc_ui(self):
         return render_template("redoc.j2")
+
+

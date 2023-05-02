@@ -9,12 +9,12 @@ from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 
-from api.commons.apispec import APISpecExt
+from api.commons import apispec
 
 
 db = SQLAlchemy()
 jwt = JWTManager()
 ma = Marshmallow()
 migrate = Migrate()
-apispec = APISpecExt()
+apispec = apispec.APISpecExt()
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")

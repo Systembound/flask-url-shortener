@@ -25,11 +25,12 @@ services:
     image: postgres:13.10
     volumes:
       - ./docker/postgresql/data/:/var/lib/postgresql/data/pgdata/
+      - ./migration:/migration
     restart: always
     env_file:
       - .flaskenv
-    networks:
-      - web
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata/
 
 
   web:

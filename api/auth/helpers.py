@@ -9,7 +9,7 @@ from flask_jwt_extended import decode_token
 from sqlalchemy.orm.exc import NoResultFound
 
 from api.extensions import db
-from api.models import TokenBlocklist
+from api.models.blocklist import TokenBlocklist
 
 
 def add_token_to_database(encoded_token, identity_claim):

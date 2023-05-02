@@ -5,17 +5,21 @@ import pytest
 from dotenv import load_dotenv
 from pytest_factoryboy import register
 
-from api.app import create_app
 from api.extensions import db as _db
-from api.models import User
+from api.models.user import User
 from tests.factories import UserFactory
+
+# TODO: move factories and fixtures to their separate files,
+#  to avoid circular imports
 
 register(UserFactory)
 
 
 @pytest.fixture(scope="session")
 def app():
+    from api.app import create_app
     load_dotenv(".testenv")
+
     app = create_app(testing=True)
     return app
 

@@ -18,6 +18,15 @@ start:
 	@mkdir -p db
 	docker-compose up
 
+shell:
+	docker-compose exec web flask shell
+
+routes:
+	docker-compose exec web flask routes
+
+console:
+	docker-compose exec web sh
+
 db-init:
 	docker-compose exec web flask db init
 
