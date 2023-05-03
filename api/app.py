@@ -3,6 +3,8 @@ import os
 
 from flask import Flask, redirect
 
+from flask_cors import CORS
+
 from api import api, commons
 from api import auth
 from api import manage
@@ -25,9 +27,15 @@ def create_app(testing=False):
     configure_cli(app)
     configure_apispec(app)
     configure_error_handlers(app)
+    configure_remains(app)
     register_blueprints(app)
 
     return app
+
+
+def configure_remains(app):
+    # add cors support *
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 def configure_error_handlers(app):
