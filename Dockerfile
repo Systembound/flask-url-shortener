@@ -11,7 +11,7 @@ FROM python:3.8
 RUN mkdir /code
 WORKDIR /code
 
-COPY requirements.txt tox.ini ./
+COPY requirements/* tox.ini ./
 # got no enought time for upgrading pip.
 # RUN pip install -U pip
 RUN pip install -r requirements.txt
@@ -19,5 +19,8 @@ RUN pip install -r requirements.txt
 
 COPY api api/
 #COPY migrations migrations/
+
+# delete * files
+RUN find . -name "*.pyc" -delete
 
 EXPOSE 5000

@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 
 def create_app(testing=False):
     """Application factory, used to create application"""
+    # load dot env
+    # from dotenv import load_dotenv
+    # load_dotenv(".flaskenv")
     app = Flask("api")
     app.config.from_object("api.config")
 
